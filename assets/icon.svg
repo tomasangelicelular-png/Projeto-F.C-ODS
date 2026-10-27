@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D472A"/>
+      <stop offset="100%" stop-color="#042F2E"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="16" fill="url(#bg)" stroke="#16A34A" stroke-width="2.5"/>
+  <!-- Gota (ODS 6) -->
+  <path d="M23 16 C23 16 33 28 33 35 C33 41 28.5 45 23 45 C17.5 45 13 41 13 35 C13 28 23 16 23 16 Z" fill="#38BDF8"/>
+  <!-- Folha (ODS 13) -->
+  <path d="M48 18 C48 36 36 47 22 46 C23 32 33 20 48 18 Z" fill="url(#leaf)" stroke="#052E16" stroke-width="1.8"/>
+  <path d="M25 43 Q34 33 44 23" stroke="#DCFCE7" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <!-- Sol / Energia (ODS 7) -->
+  <circle cx="44" cy="18" r="5" fill="#FACC15"/>
+</svg>

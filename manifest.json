@@ -1,0 +1,14 @@
+{
+  "name": "EcoGuardiões — Aprender, Jogar e Cuidar do Planeta",
+  "short_name": "EcoGuardiões",
+  "description": "Plataforma educativa e gamificada sobre água, energia e resíduos (ODS 4, 6, 7 e 13).",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#15803d",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
