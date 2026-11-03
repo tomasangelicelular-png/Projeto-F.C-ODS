@@ -1,4 +1,4 @@
-# 🌎 EcoGuardiões
+# EcoGuardiões
 
 Plataforma web educativa e gamificada para conscientização sobre **descarte correto do lixo**, **uso consciente da água** e **economia de energia**, alinhada aos Objetivos de Desenvolvimento Sustentável (ODS) da ONU:
 
@@ -11,7 +11,7 @@ Plataforma web educativa e gamificada para conscientização sobre **descarte co
 
 ---
 
-## ▶️ Como executar
+## Como executar
 
 **Opção 1 — mais simples:** dê dois cliques em `index.html` (abre no navegador).
 
@@ -26,7 +26,7 @@ Não há dependências, build ou banco de dados. Pode ser publicado diretamente 
 
 ---
 
-## 🗂️ Estrutura
+## Estrutura
 
 ```
 ecoguardioes/
@@ -43,7 +43,7 @@ ecoguardioes/
 
 ---
 
-## ✅ Rastreabilidade de requisitos
+## Rastreabilidade de requisitos
 
 | Requisito | Implementação |
 |---|---|
@@ -60,7 +60,7 @@ ecoguardioes/
 
 ---
 
-## 🎮 Gamificação
+## Gamificação
 
 - **Pontos (⭐):** aula concluída +20 · hábito diário +5 · dia 100% verde +30 · acertos nos jogos (5 a 10 por acerto) · Detetive completo +60
 - **Medalhas:** 3 de trilhas, 3 de jogos, 1 de hábitos, 1 por pontuação
@@ -69,7 +69,7 @@ ecoguardioes/
 
 ---
 
-## 📚 Referências de conteúdo
+## Referências de conteúdo
 
 - ONU Brasil — Objetivos de Desenvolvimento Sustentável (brasil.un.org/pt-br/sdgs)
 - Sabesp — Dicas de economia e consumo de água
