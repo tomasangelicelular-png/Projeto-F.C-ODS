@@ -1,9 +1,4 @@
-/* =========================================================
-   EcoGuardiões — Núcleo do Aplicativo (app.js)
-   Gerencia: estado/persistência, App Dashboard dinâmico,
-   Bottom Sheets interativos, Segmented Controls, Steppers,
-   acessibilidade (voz/fonte/som), calculadora e conquistas.
-   ========================================================= */
+
 (function () {
   'use strict';
 
@@ -32,7 +27,7 @@
     } catch (e) { return defaults(); }
   }
   let state = load();
-  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { } }
 
   /* ---------------- UTILITÁRIOS ---------------- */
   const isKids = () => state.mode === 'kids';
@@ -41,7 +36,7 @@
   const money = (n) => Number(n).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   const today = () => new Date().toISOString().slice(0, 10);
   const escapeHTML = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  function shuffle(arr) { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[a[i], a[j]] = [a[j], a[i]]; } return a; }
 
   /* ---------------- HIDRATAÇÃO DE SVGs AUTORAIS ---------------- */
   function hydrateIcons(root = document) {
@@ -74,7 +69,7 @@
   /* ---------------- FEEDBACK TÁTIL (VIBRATION API) & SONS ---------------- */
   function haptic(pattern = 15) {
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
-      try { navigator.vibrate(pattern); } catch (e) {}
+      try { navigator.vibrate(pattern); } catch (e) { }
     }
   }
 
@@ -101,7 +96,7 @@
         o.connect(g).connect(actx.destination);
         o.start(now + dt); o.stop(now + dt + 0.2);
       });
-    } catch (e) {}
+    } catch (e) { }
   }
 
   /* ---------------- LEITURA EM VOZ ALTA (Web Speech API) ---------------- */
@@ -204,14 +199,14 @@
   /* ---------------- MEDALHAS ---------------- */
   const trailDone = (id) => D.trilhas.find(tr => tr.id === id).lessons.every(l => state.lessons[l.id]);
   const BADGES = [
-    { id: 'agua',      ico: 'water',   name: { kids: 'Amigo da Gotinha',     normal: 'Guardião da Água' },      how: 'Concluir a trilha de Água',        test: () => trailDone('agua') },
-    { id: 'energia',   ico: 'energy',  name: { kids: 'Parceiro da Centelha', normal: 'Guardião da Energia' },   how: 'Concluir a trilha de Energia',     test: () => trailDone('energia') },
-    { id: 'lixo',      ico: 'leaf',    name: { kids: 'Turma da Folha',       normal: 'Guardião dos Resíduos' }, how: 'Concluir a trilha de Resíduos',    test: () => trailDone('lixo') },
-    { id: 'sort',      ico: 'recycle', name: { kids: 'Mestre das Lixeiras',  normal: 'Especialista em Coleta' },how: '80% no Ecoponto Express',          test: () => state.best.sort >= 80 },
-    { id: 'detective', ico: 'search',  name: { kids: 'Super Detetive',       normal: 'Inspetor da Casa' },      how: '100% no Detetive da Casa',         test: () => state.best.detective >= 100 },
-    { id: 'quiz',      ico: 'quiz',    name: { kids: 'Mente Rápida',         normal: 'Decisão Sustentável' },   how: '75% nas Decisões ou Fluxo Limpo',  test: () => state.best.quiz >= 75 || state.best.pipes >= 100 },
-    { id: 'habit',     ico: 'habits',  name: { kids: 'Dia 100% Verde',       normal: 'Rotina Sustentável' },    how: 'Completar todos os hábitos do dia', test: () => state.greenDays >= 1 },
-    { id: 'super',     ico: 'trophy',  name: { kids: 'Lenda do Planeta',     normal: 'Embaixador Ambiental' },  how: 'Acumular 500 pontos',              test: () => state.points >= 500 }
+    { id: 'agua', ico: 'water', name: { kids: 'Amigo da Gotinha', normal: 'Guardião da Água' }, how: 'Concluir a trilha de Água', test: () => trailDone('agua') },
+    { id: 'energia', ico: 'energy', name: { kids: 'Parceiro da Centelha', normal: 'Guardião da Energia' }, how: 'Concluir a trilha de Energia', test: () => trailDone('energia') },
+    { id: 'lixo', ico: 'leaf', name: { kids: 'Turma da Folha', normal: 'Guardião dos Resíduos' }, how: 'Concluir a trilha de Resíduos', test: () => trailDone('lixo') },
+    { id: 'sort', ico: 'recycle', name: { kids: 'Mestre das Lixeiras', normal: 'Especialista em Coleta' }, how: '80% no Ecoponto Express', test: () => state.best.sort >= 80 },
+    { id: 'detective', ico: 'search', name: { kids: 'Super Detetive', normal: 'Inspetor da Casa' }, how: '100% no Detetive da Casa', test: () => state.best.detective >= 100 },
+    { id: 'quiz', ico: 'quiz', name: { kids: 'Mente Rápida', normal: 'Decisão Sustentável' }, how: '75% nas Decisões ou Fluxo Limpo', test: () => state.best.quiz >= 75 || state.best.pipes >= 100 },
+    { id: 'habit', ico: 'habits', name: { kids: 'Dia 100% Verde', normal: 'Rotina Sustentável' }, how: 'Completar todos os hábitos do dia', test: () => state.greenDays >= 1 },
+    { id: 'super', ico: 'trophy', name: { kids: 'Lenda do Planeta', normal: 'Embaixador Ambiental' }, how: 'Acumular 500 pontos', test: () => state.points >= 500 }
   ];
   const CERT_MIN = 4;
 
@@ -359,8 +354,8 @@
               <small>${done} de ${totalLessons} módulos concluídos (${pct}%)</small>
             </div>
             <div class="apb-expand-links">
-              <a href="#trilhas" class="apb-chip-link">📚 Ver todas as trilhas</a>
-              <a href="#jogos" class="apb-chip-link">🎮 Ir para os 4 jogos</a>
+              <a href="#trilhas" class="apb-chip-link">Ver todas as trilhas</a>
+              <a href="#jogos" class="apb-chip-link">Ir para os 4 jogos</a>
             </div>
           </div>
         </div>`;
@@ -427,10 +422,10 @@
     renderContinueBanner();
 
     const cards = [
-      { ico: 'star',   value: fmt(state.points),                        label: isKids() ? 'Estrelas' : 'Pontos' },
-      { ico: 'trails', value: `${done}/${totalLessons}`,                label: isKids() ? 'Cartões' : 'Módulos' },
-      { ico: 'trophy', value: `${state.badges.length}/${BADGES.length}`,label: 'Medalhas' },
-      { ico: 'check',  value: `${habitsToday}/${D.habits.length}`,      label: isKids() ? 'Missões' : 'Hábitos hoje' }
+      { ico: 'star', value: fmt(state.points), label: isKids() ? 'Estrelas' : 'Pontos' },
+      { ico: 'trails', value: `${done}/${totalLessons}`, label: isKids() ? 'Cartões' : 'Módulos' },
+      { ico: 'trophy', value: `${state.badges.length}/${BADGES.length}`, label: 'Medalhas' },
+      { ico: 'check', value: `${habitsToday}/${D.habits.length}`, label: isKids() ? 'Missões' : 'Hábitos hoje' }
     ];
     $('#home-stats').innerHTML = cards.map(c =>
       `<div class="stat">
@@ -486,19 +481,19 @@
           </summary>
           <div class="learning-path" role="list">
             ${tr.lessons.map((l, idx) => {
-            const isDone = !!state.lessons[l.id];
-            let isCurrent = false;
-            if (!isDone && !foundNext) {
-              isCurrent = true;
-              foundNext = true;
-            }
-            const isPending = !isDone && !isCurrent;
-            const statusCls = isDone ? 'is-done' : (isCurrent ? 'is-current' : 'is-pending');
-            const statusText = isDone
-              ? '✓ Concluído'
-              : (isCurrent ? (isKids() ? '⚡ Próximo!' : '⚡ Em andamento') : `Módulo ${idx + 1}`);
+        const isDone = !!state.lessons[l.id];
+        let isCurrent = false;
+        if (!isDone && !foundNext) {
+          isCurrent = true;
+          foundNext = true;
+        }
+        const isPending = !isDone && !isCurrent;
+        const statusCls = isDone ? 'is-done' : (isCurrent ? 'is-current' : 'is-pending');
+        const statusText = isDone
+          ? '✓ Concluído'
+          : (isCurrent ? (isKids() ? 'Próximo' : 'Em andamento') : `Módulo ${idx + 1}`);
 
-            return `<div class="path-node-row ${statusCls}" role="listitem">
+        return `<div class="path-node-row ${statusCls}" role="listitem">
               <button type="button" class="path-node-card ${statusCls} lesson-btn ${isDone ? 'done' : ''}" data-lesson="${l.id}">
                 <div class="path-node-gem ${statusCls}" aria-hidden="true">
                   ${isDone ? `<span class="png-icon check-icon">${I.ui('check')}</span>` : `<span class="png-num">${idx + 1}</span>`}
@@ -512,7 +507,7 @@
                 <span class="path-node-arrow" aria-hidden="true">${I.ui('arrowRight')}</span>
               </button>
             </div>`;
-          }).join('')}
+      }).join('')}
           </div>
         </details>
       </article>`;
@@ -655,13 +650,13 @@
     const html = `
       <article class="glossary-sheet" data-speak-area>
         <div class="glossary-head">
-          <div class="glossary-badge-icon">📖</div>
+          <div class="glossary-badge-icon">${I.ui('trails')}</div>
           <div>
             <span class="eyebrow">DICIONÁRIO DESCOMPLICADO</span>
             <h2 id="modal-title">Entenda as Palavras do Planeta</h2>
           </div>
         </div>
-        <p class="glossary-intro">Aqui não tem termo difícil! Toque no botão de áudio 🔊 para ouvir a explicação de cada palavra do dia a dia:</p>
+        <p class="glossary-intro">Aqui não tem termo difícil! Toque no botão de áudio para ouvir a explicação de cada palavra do dia a dia:</p>
         <div class="glossary-list">
           ${items.map(g => `
             <div class="glossary-card">
@@ -832,15 +827,15 @@
     if (tbCalc) tbCalc.textContent = `${money(totalRs)}/mês`;
 
     const cards = isKids() ? [
-      { ico: 'water',  value: `${fmt(litros)} Litros`,  sub: `≈ ${baldes} baldes cheios! 🪣`, label: `${banhosPoupados} banhos inteiros poupados`, cls: 'water' },
-      { ico: 'energy', value: `${fmt(kwh)} kWh de Luz`, sub: `≈ ${horasTv}h de TV ligada! 📺`, label: 'Muita energia guardada na casa', cls: 'energy' },
-      { ico: 'coin',   value: money(totalRs),          sub: 'Economia no cofrinho! 🪙', label: 'Dinheiro que sobra para passear', cls: 'money' },
-      { ico: 'globe',  value: 'Ar Mais Puro! 🌳',      sub: `≈ ${arvoresEquiv} árvores plantadas!`, label: 'Você ajudou a cuidar da Terra', cls: 'climate' }
+      { ico: 'water', value: `${fmt(litros)} Litros`, sub: `≈ ${baldes} baldes cheios!`, label: `${banhosPoupados} banhos inteiros poupados`, cls: 'water' },
+      { ico: 'energy', value: `${fmt(kwh)} kWh de Luz`, sub: `≈ ${horasTv}h de TV ligada!`, label: 'Muita energia guardada na casa', cls: 'energy' },
+      { ico: 'coin', value: money(totalRs), sub: 'Economia no cofrinho!', label: 'Dinheiro que sobra para passear', cls: 'money' },
+      { ico: 'globe', value: 'Ar Mais Puro!', sub: `≈ ${arvoresEquiv} árvores plantadas!`, label: 'Você ajudou a cuidar da Terra', cls: 'climate' }
     ] : [
-      { ico: 'water',  value: `${fmt(litros)} Litros`,  sub: `≈ ${baldes} baldes de 10L (ou ${banhosPoupados} banhos)`, label: `Água poupada que não foi pro ralo`, cls: 'water' },
-      { ico: 'energy', value: `${fmt(kwh, 1)} kWh`,     sub: `≈ ${horasTv} horas de TV ligada`, label: 'Eletricidade economizada no mês', cls: 'energy' },
-      { ico: 'coin',   value: money(totalRs),          sub: `${money(totalRs * 12)} poupados no ano`, label: 'Economia direta no orçamento familiar', cls: 'money' },
-      { ico: 'globe',  value: `${fmt(co2Ano, 1)} kg CO₂`, sub: `≈ ${arvoresEquiv} árvores adultas`, label: 'Poluição que deixou de ir pro ar', cls: 'climate' }
+      { ico: 'water', value: `${fmt(litros)} Litros`, sub: `≈ ${baldes} baldes de 10L (ou ${banhosPoupados} banhos)`, label: `Água poupada que não foi pro ralo`, cls: 'water' },
+      { ico: 'energy', value: `${fmt(kwh, 1)} kWh`, sub: `≈ ${horasTv} horas de TV ligada`, label: 'Eletricidade economizada no mês', cls: 'energy' },
+      { ico: 'coin', value: money(totalRs), sub: `${money(totalRs * 12)} poupados no ano`, label: 'Economia direta no orçamento familiar', cls: 'money' },
+      { ico: 'globe', value: `${fmt(co2Ano, 1)} kg CO₂`, sub: `≈ ${arvoresEquiv} árvores adultas`, label: 'Poluição que deixou de ir pro ar', cls: 'climate' }
     ];
 
     $('#calc-cards').innerHTML = cards.map(c =>
@@ -855,8 +850,8 @@
     ).join('');
 
     const items = [
-      { name: 'Banho de 5 minutos', meta: `${fmt(banhoL)} L poupados (≈ ${Math.round(banhoL/10)} baldes)`, val: banhoL / 1000 * v('tarifaAgua') + banhoKwh * v('tarifaLuz') },
-      { name: 'Torneira fechada ao escovar', meta: `${fmt(escovaL)} L poupados (≈ ${Math.round(escovaL/10)} baldes)`, val: escovaL / 1000 * v('tarifaAgua') },
+      { name: 'Banho de 5 minutos', meta: `${fmt(banhoL)} L poupados (≈ ${Math.round(banhoL / 10)} baldes)`, val: banhoL / 1000 * v('tarifaAgua') + banhoKwh * v('tarifaLuz') },
+      { name: 'Torneira fechada ao escovar', meta: `${fmt(escovaL)} L poupados (≈ ${Math.round(escovaL / 10)} baldes)`, val: escovaL / 1000 * v('tarifaAgua') },
       { name: 'Trocar para lâmpadas LED', meta: `${fmt(lampKwh, 1)} kWh (ilumina mais gastando menos)`, val: lampKwh * v('tarifaLuz') },
       { name: 'Desligar aparelhos da tomada (Stand-by)', meta: `${fmt(standbyKwh, 1)} kWh (apaga a luzinha vermelha)`, val: standbyKwh * v('tarifaLuz') },
       { name: 'Limpar calçada com vassoura', meta: `${fmt(calcadaL)} L (sem mangueira ligada à toa)`, val: calcadaL / 1000 * v('tarifaAgua') }
@@ -924,7 +919,7 @@
     const done = state.habits.done;
     const dateStr = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: 'long' });
     const greenBadge = state.greenDays > 0
-      ? ` • <span style="font-weight:700; color:#15803D;">🌱 ${state.greenDays} ${state.greenDays === 1 ? 'dia 100% verde' : 'dias 100% verdes'}</span>`
+      ? ` • <span style="font-weight:700; color:#15803D;">${state.greenDays} ${state.greenDays === 1 ? 'dia 100% verde' : 'dias 100% verdes'}</span>`
       : '';
     $('#habit-date').innerHTML = `${dateStr}${greenBadge}`;
     $('#habit-list').innerHTML = D.habits.map(h => {
@@ -957,7 +952,7 @@
     }
     const ringIcon = $('#habit-ring-icon');
     if (ringIcon) {
-      ringIcon.textContent = done.length === total ? '⭐' : (done.length > 0 ? '🌱' : '💧');
+      ringIcon.innerHTML = I.ui(done.length === total ? 'star' : 'leaf');
     }
   }
   $('#habit-list').addEventListener('change', (e) => {
@@ -1067,7 +1062,7 @@
 
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js').then(reg => reg.update()).catch(() => {});
+      navigator.serviceWorker.register('sw.js').then(reg => reg.update()).catch(() => { });
       let refreshing = false;
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         if (!refreshing) { refreshing = true; window.location.reload(); }

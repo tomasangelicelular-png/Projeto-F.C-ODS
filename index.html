@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="EcoGuardiões: aplicativo interativo de economia de água, energia e reciclagem na prática.">
+  <meta name="description"
+    content="EcoGuardiões: aplicativo interativo de economia de água, energia e reciclagem na prática.">
   <meta name="theme-color" content="#0F5132">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -12,13 +14,16 @@
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Fredoka:wght@500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body class="mode-normal">
   <a class="skip-link" href="#main">Pular para o conteúdo principal</a>
 
-  <!-- ===================== TOP APP BAR ===================== -->
+  <!--APP BAR-->
   <header class="site-header">
     <div class="container header-inner">
       <a href="#inicio" class="brand" aria-label="EcoGuardiões - tela inicial">
@@ -57,7 +62,8 @@
           <strong id="points">0</strong>
           <span class="sr-only"> pontos</span>
         </a>
-        <button class="tool-btn" id="sound-toggle" title="Ativar ou desativar efeitos sonoros" aria-pressed="true" aria-label="Efeitos sonoros"></button>
+        <button class="tool-btn" id="sound-toggle" title="Ativar ou desativar efeitos sonoros" aria-pressed="true"
+          aria-label="Efeitos sonoros"></button>
         <button class="tool-btn mode-btn" id="mode-toggle"></button>
       </div>
     </div>
@@ -68,24 +74,18 @@
     <!-- ===================== TELA 1: DASHBOARD DO APP (INÍCIO) ===================== -->
     <section id="view-inicio" class="view" aria-labelledby="home-title">
       <div class="container app-dashboard">
-
-        <!-- Destaque Principal com Expansão (Progressive Disclosure) -->
         <div class="app-primary-banner" id="continue-banner" data-speak-area></div>
-
-        <!-- Abas de Objetivo para separar áreas sem poluir a tela -->
         <div class="section-tabs" role="tablist" aria-label="Seções da tela inicial">
           <button type="button" class="sec-tab active" data-home-tab="atividades" role="tab" aria-selected="true">
-            🎯 Atividades
+            Atividades
           </button>
           <button type="button" class="sec-tab" data-home-tab="dicas" role="tab" aria-selected="false">
-            💡 Dica &amp; Termos
+            Dica e Termos
           </button>
           <button type="button" class="sec-tab" data-home-tab="progresso" role="tab" aria-selected="false">
-            📊 Meu Progresso
+            Meu Progresso
           </button>
         </div>
-
-        <!-- ABA 1: Atividades Principais (Foco limpo nos 4 objetivos) -->
         <div class="home-tab-pane" data-home-pane="atividades">
           <div class="app-quick-grid" aria-label="Ações de aprendizagem do aplicativo">
             <a href="#jogos" class="app-tile tile-games">
@@ -93,7 +93,8 @@
                 <span class="tile-icon" data-icon="games"></span>
                 <span class="tile-badge" id="tile-badge-games">4 jogos</span>
               </div>
-              <strong class="tile-title"><span class="only-kids">Jogos do Planeta</span><span class="only-normal">Desafios Práticos</span></strong>
+              <strong class="tile-title"><span class="only-kids">Jogos do Planeta</span><span
+                  class="only-normal">Desafios Práticos</span></strong>
               <span class="tile-sub">Aprenda jogando na prática</span>
             </a>
 
@@ -102,7 +103,8 @@
                 <span class="tile-icon" data-icon="trails"></span>
                 <span class="tile-badge" id="tile-badge-trails">0/9</span>
               </div>
-              <strong class="tile-title"><span class="only-kids">Histórias Visuais</span><span class="only-normal">Guias Ilustrados</span></strong>
+              <strong class="tile-title"><span class="only-kids">Histórias Visuais</span><span class="only-normal">Guias
+                  Ilustrados</span></strong>
               <span class="tile-sub">Água, energia e reciclagem</span>
             </a>
 
@@ -111,7 +113,8 @@
                 <span class="tile-icon" data-icon="calc"></span>
                 <span class="tile-badge" id="tile-badge-calc">Simular</span>
               </div>
-              <strong class="tile-title"><span class="only-kids">Simulador Divertido</span><span class="only-normal">Simulador da Casa</span></strong>
+              <strong class="tile-title"><span class="only-kids">Simulador Divertido</span><span
+                  class="only-normal">Simulador da Casa</span></strong>
               <span class="tile-sub">Calcule sua economia mensal</span>
             </a>
 
@@ -120,7 +123,8 @@
                 <span class="tile-icon" data-icon="habits"></span>
                 <span class="tile-badge" id="tile-badge-habits">0/8 hoje</span>
               </div>
-              <strong class="tile-title"><span class="only-kids">Missões do Dia</span><span class="only-normal">Missões Diárias</span></strong>
+              <strong class="tile-title"><span class="only-kids">Missões do Dia</span><span class="only-normal">Missões
+                  Diárias</span></strong>
               <span class="tile-sub">Checklist de hábitos em casa</span>
             </a>
           </div>
@@ -132,11 +136,13 @@
             <aside class="tip-of-day" id="tip-of-day" aria-live="polite" data-speak-area></aside>
 
             <div class="expandable-section">
-              <div class="educational-banner" id="btn-open-glossary" role="button" tabindex="0" aria-label="Abrir Dicionário Descomplicado do Guardião">
-                <div class="edu-banner-icon">📖</div>
+              <div class="educational-banner" id="btn-open-glossary" role="button" tabindex="0"
+                aria-label="Abrir Dicionário Descomplicado do Guardião">
+                <div class="edu-banner-icon" data-icon="trails"></div>
                 <div class="edu-banner-info">
                   <strong class="edu-banner-title">Dicionário Sem Segredos</strong>
-                  <p class="edu-banner-desc">Toque em um termo abaixo para expandir a explicação ou abra o dicionário completo.</p>
+                  <p class="edu-banner-desc">Toque em um termo abaixo para expandir a explicação ou abra o dicionário
+                    completo.</p>
                 </div>
                 <span class="edu-banner-pill">Ver todos</span>
               </div>
@@ -150,7 +156,8 @@
                 <span id="mascot-phrase">Toque em mim ou nos meus amigos para ouvir uma dica!</span>
               </div>
               <div class="mascot-trio">
-                <button class="mascot-btn mascot-water active" data-mascot-talk="water" aria-label="Ouvir dica da Gotinha">
+                <button class="mascot-btn mascot-water active" data-mascot-talk="water"
+                  aria-label="Ouvir dica da Gotinha">
                   <span class="mascot-art" data-mascot="water"></span>
                   <span class="mascot-name">Gotinha</span>
                   <span class="mascot-tag">Água</span>
@@ -183,7 +190,8 @@
       <div class="container">
         <header class="page-head" data-speak-area>
           <div>
-            <h1 id="trails-title"><span class="only-kids">Cartões Ilustrados</span><span class="only-normal">Guias Práticos</span></h1>
+            <h1 id="trails-title"><span class="only-kids">Cartões Ilustrados</span><span class="only-normal">Guias
+                Práticos</span></h1>
             <p class="only-kids">Toque em um cartão para ver os desenhos e ganhar estrelas!</p>
             <p class="only-normal">Escolha um tema ou toque diretamente em um módulo prático.</p>
           </div>
@@ -204,7 +212,8 @@
         <div id="games-hub">
           <header class="page-head games-head" data-speak-area>
             <div>
-              <h1 id="games-title"><span class="only-kids">Central de Jogos</span><span class="only-normal">Jogos Práticos</span></h1>
+              <h1 id="games-title"><span class="only-kids">Central de Jogos</span><span class="only-normal">Jogos
+                  Práticos</span></h1>
               <p class="only-kids">Escolha a dificuldade e toque no jogo para começar!</p>
               <p class="only-normal">Selecione a dificuldade e pratique situações reais sem interrupções.</p>
             </div>
@@ -301,7 +310,8 @@
       <div class="container">
         <header class="page-head" data-speak-area>
           <div>
-            <h1 id="calc-title"><span class="only-kids">Simulador da Casa</span><span class="only-normal">Simulador de Economia</span></h1>
+            <h1 id="calc-title"><span class="only-kids">Simulador da Casa</span><span class="only-normal">Simulador de
+                Economia</span></h1>
             <p class="only-kids">Deslize os controles e veja quanto sua família economiza!</p>
             <p class="only-normal">Simule em tempo real o impacto mensal na conta de água e energia.</p>
           </div>
@@ -311,13 +321,15 @@
         <div class="calc-layout">
           <div class="calc-results" aria-live="polite" data-speak-area>
             <div class="results-header">
-              <h2><span class="only-kids">Economia por mês</span><span class="only-normal">Impacto mensal estimado</span></h2>
-              <button class="btn btn-ghost btn-sm" data-speak><span data-icon="speaker"></span><span>Ouvir</span></button>
+              <h2><span class="only-kids">Economia por mês</span><span class="only-normal">Impacto mensal
+                  estimado</span></h2>
+              <button class="btn btn-ghost btn-sm" data-speak><span
+                  data-icon="speaker"></span><span>Ouvir</span></button>
             </div>
             <div class="result-cards" id="calc-cards"></div>
             <p class="calc-note" id="calc-note"></p>
             <details class="expand-drawer only-normal">
-              <summary class="expand-summary">📊 Ver detalhamento de economia por hábito</summary>
+              <summary class="expand-summary">Ver detalhamento de economia por hábito</summary>
               <div class="calc-breakdown" id="calc-breakdown"></div>
             </details>
             <table class="calc-table sr-only" id="calc-table"></table>
@@ -325,8 +337,10 @@
 
           <form id="calc-form" class="calc-form" onsubmit="return false">
             <div class="section-tabs calc-tabs" role="tablist" aria-label="Categorias do simulador">
-              <button type="button" class="sec-tab active" data-calc-tab="agua" role="tab" aria-selected="true">💧 Água e Banho</button>
-              <button type="button" class="sec-tab" data-calc-tab="energia" role="tab" aria-selected="false">⚡ Energia e Luz</button>
+              <button type="button" class="sec-tab active" data-calc-tab="agua" role="tab" aria-selected="true">Água
+                e Banho</button>
+              <button type="button" class="sec-tab" data-calc-tab="energia" role="tab" aria-selected="false">Energia e
+                Luz</button>
             </div>
             <fieldset data-calc-pane="agua">
               <legend><span data-icon="water"></span> Uso de Água no Dia a Dia</legend>
@@ -336,9 +350,11 @@
                   <output id="out-pessoas">3</output>
                 </span>
                 <div class="stepper-range">
-                  <button type="button" class="step-btn" data-step-input="pessoas" data-step="-1" aria-label="Diminuir pessoas">−</button>
+                  <button type="button" class="step-btn" data-step-input="pessoas" data-step="-1"
+                    aria-label="Diminuir pessoas">−</button>
                   <input type="range" name="pessoas" min="1" max="10" value="3">
-                  <button type="button" class="step-btn" data-step-input="pessoas" data-step="1" aria-label="Aumentar pessoas">+</button>
+                  <button type="button" class="step-btn" data-step-input="pessoas" data-step="1"
+                    aria-label="Aumentar pessoas">+</button>
                 </div>
               </label>
 
@@ -348,9 +364,11 @@
                   <output id="out-banhoAtual">15 min</output>
                 </span>
                 <div class="stepper-range">
-                  <button type="button" class="step-btn" data-step-input="banhoAtual" data-step="-1" aria-label="Diminuir tempo atual">−</button>
+                  <button type="button" class="step-btn" data-step-input="banhoAtual" data-step="-1"
+                    aria-label="Diminuir tempo atual">−</button>
                   <input type="range" name="banhoAtual" min="5" max="30" value="15">
-                  <button type="button" class="step-btn" data-step-input="banhoAtual" data-step="1" aria-label="Aumentar tempo atual">+</button>
+                  <button type="button" class="step-btn" data-step-input="banhoAtual" data-step="1"
+                    aria-label="Aumentar tempo atual">+</button>
                 </div>
               </label>
 
@@ -361,9 +379,11 @@
                   <output id="out-banhoMeta">5 min</output>
                 </span>
                 <div class="stepper-range">
-                  <button type="button" class="step-btn" data-step-input="banhoMeta" data-step="-1" aria-label="Diminuir meta de banho">−</button>
+                  <button type="button" class="step-btn" data-step-input="banhoMeta" data-step="-1"
+                    aria-label="Diminuir meta de banho">−</button>
                   <input type="range" name="banhoMeta" min="3" max="20" value="5">
-                  <button type="button" class="step-btn" data-step-input="banhoMeta" data-step="1" aria-label="Aumentar meta de banho">+</button>
+                  <button type="button" class="step-btn" data-step-input="banhoMeta" data-step="1"
+                    aria-label="Aumentar meta de banho">+</button>
                 </div>
               </label>
 
@@ -381,9 +401,11 @@
                   <output id="out-lampadas">4</output>
                 </span>
                 <div class="stepper-range">
-                  <button type="button" class="step-btn" data-step-input="lampadas" data-step="-1" aria-label="Diminuir lâmpadas">−</button>
+                  <button type="button" class="step-btn" data-step-input="lampadas" data-step="-1"
+                    aria-label="Diminuir lâmpadas">−</button>
                   <input type="range" name="lampadas" min="0" max="20" value="4">
-                  <button type="button" class="step-btn" data-step-input="lampadas" data-step="1" aria-label="Aumentar lâmpadas">+</button>
+                  <button type="button" class="step-btn" data-step-input="lampadas" data-step="1"
+                    aria-label="Aumentar lâmpadas">+</button>
                 </div>
               </label>
 
@@ -400,9 +422,11 @@
                   <output id="out-horas">5 h</output>
                 </span>
                 <div class="stepper-range">
-                  <button type="button" class="step-btn" data-step-input="horas" data-step="-1" aria-label="Diminuir horas">−</button>
+                  <button type="button" class="step-btn" data-step-input="horas" data-step="-1"
+                    aria-label="Diminuir horas">−</button>
                   <input type="range" name="horas" min="1" max="12" value="5">
-                  <button type="button" class="step-btn" data-step-input="horas" data-step="1" aria-label="Aumentar horas">+</button>
+                  <button type="button" class="step-btn" data-step-input="horas" data-step="1"
+                    aria-label="Aumentar horas">+</button>
                 </div>
               </label>
 
@@ -413,9 +437,11 @@
                   <output id="out-standby">4</output>
                 </span>
                 <div class="stepper-range">
-                  <button type="button" class="step-btn" data-step-input="standby" data-step="-1" aria-label="Diminuir aparelhos">−</button>
+                  <button type="button" class="step-btn" data-step-input="standby" data-step="-1"
+                    aria-label="Diminuir aparelhos">−</button>
                   <input type="range" name="standby" min="0" max="15" value="4">
-                  <button type="button" class="step-btn" data-step-input="standby" data-step="1" aria-label="Aumentar aparelhos">+</button>
+                  <button type="button" class="step-btn" data-step-input="standby" data-step="1"
+                    aria-label="Aumentar aparelhos">+</button>
                 </div>
               </label>
 
@@ -426,9 +452,11 @@
                   <output id="out-calcada">4x</output>
                 </span>
                 <div class="stepper-range">
-                  <button type="button" class="step-btn" data-step-input="calcada" data-step="-1" aria-label="Diminuir limpezas">−</button>
+                  <button type="button" class="step-btn" data-step-input="calcada" data-step="-1"
+                    aria-label="Diminuir limpezas">−</button>
                   <input type="range" name="calcada" min="0" max="12" value="4">
-                  <button type="button" class="step-btn" data-step-input="calcada" data-step="1" aria-label="Aumentar limpezas">+</button>
+                  <button type="button" class="step-btn" data-step-input="calcada" data-step="1"
+                    aria-label="Aumentar limpezas">+</button>
                 </div>
               </label>
             </fieldset>
@@ -454,7 +482,8 @@
       <div class="container">
         <header class="page-head" data-speak-area>
           <div>
-            <h1 id="habits-title"><span class="only-kids">Missões e Medalhas</span><span class="only-normal">Hábitos e Conquistas</span></h1>
+            <h1 id="habits-title"><span class="only-kids">Missões e Medalhas</span><span class="only-normal">Hábitos e
+                Conquistas</span></h1>
             <p class="only-kids">Toque no que você cumpriu hoje para ganhar estrelas!</p>
             <p class="only-normal">Registre suas atitudes diárias, desbloqueie conquistas e emita seu certificado.</p>
           </div>
@@ -462,24 +491,26 @@
         </header>
 
         <div class="section-tabs" role="tablist" aria-label="Seções de Hábitos e Conquistas">
-          <button type="button" class="sec-tab active" data-habits-tab="checklist" role="tab" aria-selected="true">✅ Checklist de Hoje</button>
-          <button type="button" class="sec-tab" data-habits-tab="conquistas" role="tab" aria-selected="false">🏅 Medalhas e Certificado</button>
+          <button type="button" class="sec-tab active" data-habits-tab="checklist" role="tab" aria-selected="true">Checklist de Hoje</button>
+          <button type="button" class="sec-tab" data-habits-tab="conquistas" role="tab" aria-selected="false">Medalhas e Certificado</button>
         </div>
 
         <div data-habits-pane="checklist">
           <section class="panel" aria-labelledby="habit-list-title">
             <div class="panel-head">
               <div>
-                <h2 id="habit-list-title"><span class="only-kids">Missões de hoje</span><span class="only-normal">Checklist do dia</span></h2>
+                <h2 id="habit-list-title"><span class="only-kids">Missões de hoje</span><span
+                    class="only-normal">Checklist do dia</span></h2>
                 <small id="habit-date"></small>
               </div>
               <div class="habit-gauge-group">
                 <div class="habit-ring-wrap" title="Progresso das missões diárias">
                   <svg class="habit-ring-svg" viewBox="0 0 48 48" width="48" height="48" aria-hidden="true">
                     <circle class="hring-bg" cx="24" cy="24" r="19" />
-                    <circle class="hring-fg" id="habit-radial-fill" cx="24" cy="24" r="19" stroke-dasharray="119.38" stroke-dashoffset="119.38" />
+                    <circle class="hring-fg" id="habit-radial-fill" cx="24" cy="24" r="19" stroke-dasharray="119.38"
+                      stroke-dashoffset="119.38" />
                   </svg>
-                  <span class="habit-ring-icon" id="habit-ring-icon" aria-hidden="true">🌱</span>
+                  <span class="habit-ring-icon" id="habit-ring-icon" aria-hidden="true" data-icon="leaf"></span>
                 </div>
                 <span class="habit-counter" id="habit-count">0/8</span>
               </div>
@@ -492,7 +523,8 @@
         <div data-habits-pane="conquistas" hidden>
           <section class="panel" aria-labelledby="badges-title" style="margin-bottom:.85rem;">
             <div class="panel-head">
-              <h2 id="badges-title"><span class="only-kids">Suas medalhas</span><span class="only-normal">Conquistas</span></h2>
+              <h2 id="badges-title"><span class="only-kids">Suas medalhas</span><span
+                  class="only-normal">Conquistas</span></h2>
               <span class="habit-counter" id="badges-count">0/8</span>
             </div>
             <ul class="badges" id="badges"></ul>
@@ -500,7 +532,8 @@
 
           <section class="panel cert-panel" aria-labelledby="cert-title">
             <div class="panel-head">
-              <h2 id="cert-title"><span data-icon="cert"></span> <span class="only-kids">Diploma de Guardião</span><span class="only-normal">Certificado de Conclusão</span></h2>
+              <h2 id="cert-title"><span data-icon="cert"></span> <span class="only-kids">Diploma de Guardião</span><span
+                  class="only-normal">Certificado de Conclusão</span></h2>
             </div>
             <div id="cert-area"></div>
           </section>
@@ -552,4 +585,5 @@
   <script src="js/app.js"></script>
   <script src="js/games.js"></script>
 </body>
+
 </html>

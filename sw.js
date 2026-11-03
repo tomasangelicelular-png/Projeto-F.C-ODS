@@ -1,5 +1,5 @@
 /* EcoGuardiões — Service Worker (RNF-04: funcionamento offline) */
-const CACHE = 'ecoguardioes-v12';
+const CACHE = 'ecoguardioes-v13';
 const ASSETS = [
   './', './index.html', './css/style.css',
   './js/icons.js', './js/data.js', './js/app.js', './js/games.js',
@@ -28,7 +28,7 @@ self.addEventListener('fetch', (e) => {
     fetch(e.request, { cache: 'no-cache' })
       .then(res => {
         const copy = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => {});
+        caches.open(CACHE).then(c => c.put(e.request, copy)).catch(() => { });
         return res;
       })
       .catch(() => caches.match(e.request).then(r => r || caches.match('./index.html')))
