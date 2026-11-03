@@ -313,69 +313,78 @@
     const pct = Math.round(done / totalLessons * 100);
     const nextItem = findNextUnfinishedLesson();
 
-    const circ = 163.36; // 2 * PI * 26
+    const circ = 163.36;
     const ringOffset = circ - (circ * pct / 100);
+    const wasExpanded = banner.classList.contains('is-expanded');
 
     if (nextItem) {
       const { trail, lesson, index } = nextItem;
       const kicker = done === 0
-        ? (isKids() ? 'Comece sua jornada' : 'Próximo passo recomendado')
-        : (isKids() ? `Continue de onde parou • ${trail.category}` : `Continuar • ${trail.category} (${index + 1}/${trail.lessons.length})`);
+        ? (isKids() ? 'Destaque Principal' : 'Destaque • Próximo Passo')
+        : (isKids() ? `Continue • ${trail.category}` : `Continuar • ${trail.category} (${index + 1}/${trail.lessons.length})`);
       const title = t(lesson.title);
-      const sub = isKids()
-        ? 'Veja os cartões ilustrados ou abra os jogos!'
-        : `Avance nos guias práticos ou pratique nos 4 jogos interativos.`;
+      const introText = lesson.intro ? t(lesson.intro) : t(trail.desc);
 
       banner.innerHTML = `
-        <div class="apb-left">
-          <div class="apb-ring-wrap" title="${pct}% concluído">
-            <svg class="activity-ring-svg" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
-              <circle class="aring-track" cx="32" cy="32" r="26" />
-              <circle class="aring-fill" cx="32" cy="32" r="26" stroke-dasharray="${circ}" stroke-dashoffset="${ringOffset}" />
-            </svg>
-            <div class="apb-mascot">${I.mascot(trail.mascotKey)}</div>
-            <span class="apb-ring-badge">${pct}%</span>
-          </div>
-          <div class="apb-info">
-            <span class="apb-kicker">${kicker}</span>
-            <h1 id="home-title" class="apb-title">${title}</h1>
-            <p class="apb-sub">${sub}</p>
-            <div class="apb-progress">
-              <div class="bar"><span style="width:${pct}%"></span></div>
-              <small>${done}/${totalLessons} (${pct}%)</small>
+        <div class="apb-main-row">
+          <div class="apb-left">
+            <div class="apb-ring-wrap" title="${pct}% concluído">
+              <svg class="activity-ring-svg" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
+                <circle class="aring-track" cx="32" cy="32" r="26" />
+                <circle class="aring-fill" cx="32" cy="32" r="26" stroke-dasharray="${circ}" stroke-dashoffset="${ringOffset}" />
+              </svg>
+              <div class="apb-mascot">${I.mascot(trail.mascotKey)}</div>
+              <span class="apb-ring-badge">${pct}%</span>
+            </div>
+            <div class="apb-info">
+              <span class="apb-kicker">${kicker}</span>
+              <h1 id="home-title" class="apb-title">${title}</h1>
             </div>
           </div>
+          <div class="apb-actions">
+            <button type="button" class="btn btn-app-cta" data-lesson="${lesson.id}">
+              ${done === 0 ? (isKids() ? 'Começar' : 'Iniciar Guia') : 'Continuar'}
+            </button>
+            <button type="button" class="btn btn-apb-expand" data-toggle-hero aria-expanded="${wasExpanded}">
+              <span>${wasExpanded ? 'Recolher ▴' : 'Detalhes ▾'}</span>
+            </button>
+            <button type="button" class="btn btn-app-speak" data-speak aria-label="Ouvir destaque">${I.ui('speaker')}</button>
+          </div>
         </div>
-        <div class="apb-actions">
-          <button type="button" class="btn btn-app-cta" data-lesson="${lesson.id}">
-            ${done === 0 ? (isKids() ? 'Começar' : 'Iniciar Guia') : 'Continuar'}
-          </button>
-          <button type="button" class="btn btn-app-speak" data-speak aria-label="Ouvir destaque">${I.ui('speaker')}</button>
+        <div class="apb-expand-drawer" id="apb-expand-drawer" ${wasExpanded ? '' : 'hidden'}>
+          <p class="apb-expand-desc">${introText}</p>
+          <div class="apb-expand-meta">
+            <div class="apb-progress">
+              <div class="bar"><span style="width:${pct}%"></span></div>
+              <small>${done} de ${totalLessons} módulos concluídos (${pct}%)</small>
+            </div>
+            <div class="apb-expand-links">
+              <a href="#trilhas" class="apb-chip-link">📚 Ver todas as trilhas</a>
+              <a href="#jogos" class="apb-chip-link">🎮 Ir para os 4 jogos</a>
+            </div>
+          </div>
         </div>`;
     } else {
       banner.innerHTML = `
-        <div class="apb-left">
-          <div class="apb-ring-wrap" title="100% concluído">
-            <svg class="activity-ring-svg" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
-              <circle class="aring-track" cx="32" cy="32" r="26" />
-              <circle class="aring-fill" cx="32" cy="32" r="26" stroke-dasharray="${circ}" stroke-dashoffset="0" />
-            </svg>
-            <div class="apb-mascot">${I.mascot('leaf')}</div>
-            <span class="apb-ring-badge">100%</span>
-          </div>
-          <div class="apb-info">
-            <span class="apb-kicker">Guias 100% Concluídos!</span>
-            <h1 id="home-title" class="apb-title">${isKids() ? 'Você completou todos os cartões!' : 'Todos os módulos concluídos!'}</h1>
-            <p class="apb-sub">${isKids() ? 'Agora bata seu recorde nos 4 jogos!' : 'Teste seus conhecimentos no nível Difícil dos 4 jogos.'}</p>
-            <div class="apb-progress">
-              <div class="bar"><span style="width:100%"></span></div>
-              <small>${totalLessons}/${totalLessons} (100%)</small>
+        <div class="apb-main-row">
+          <div class="apb-left">
+            <div class="apb-ring-wrap" title="100% concluído">
+              <svg class="activity-ring-svg" viewBox="0 0 64 64" width="64" height="64" aria-hidden="true">
+                <circle class="aring-track" cx="32" cy="32" r="26" />
+                <circle class="aring-fill" cx="32" cy="32" r="26" stroke-dasharray="${circ}" stroke-dashoffset="0" />
+              </svg>
+              <div class="apb-mascot">${I.mascot('leaf')}</div>
+              <span class="apb-ring-badge">100%</span>
+            </div>
+            <div class="apb-info">
+              <span class="apb-kicker">Guias 100% Concluídos!</span>
+              <h1 id="home-title" class="apb-title">${isKids() ? 'Você completou todos os cartões!' : 'Todos os módulos concluídos!'}</h1>
             </div>
           </div>
-        </div>
-        <div class="apb-actions">
-          <a href="#jogos" class="btn btn-app-cta">Jogar Agora</a>
-          <button type="button" class="btn btn-app-speak" data-speak aria-label="Ouvir destaque">${I.ui('speaker')}</button>
+          <div class="apb-actions">
+            <a href="#jogos" class="btn btn-app-cta">Jogar Agora</a>
+            <button type="button" class="btn btn-app-speak" data-speak aria-label="Ouvir destaque">${I.ui('speaker')}</button>
+          </div>
         </div>`;
     }
   }
@@ -447,11 +456,12 @@
     const grid = $('#trails-grid');
     grid.classList.toggle('filtered-single', list.length === 1);
 
-    grid.innerHTML = list.map(tr => {
+    grid.innerHTML = list.map((tr, trIndex) => {
       const done = tr.lessons.filter(l => state.lessons[l.id]).length;
       const total = tr.lessons.length;
       const pct = Math.round(done / total * 100);
       let foundNext = false;
+      const isOpen = list.length === 1 || trIndex === 0;
 
       return `<article class="trail-card theme-${tr.theme}">
         <header class="trail-head">
@@ -468,9 +478,14 @@
         </header>
         <p class="trail-desc">${t(tr.desc)}</p>
         <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" aria-label="Progresso da trilha"><span style="width:${pct}%"></span></div>
-        
-        <div class="learning-path" role="list">
-          ${tr.lessons.map((l, idx) => {
+
+        <details class="trail-expand-details" ${isOpen ? 'open' : ''}>
+          <summary class="trail-expand-summary">
+            <span>Ver os ${total} módulos desta trilha</span>
+            <span class="trail-expand-chevron">▾</span>
+          </summary>
+          <div class="learning-path" role="list">
+            ${tr.lessons.map((l, idx) => {
             const isDone = !!state.lessons[l.id];
             let isCurrent = false;
             if (!isDone && !foundNext) {
@@ -498,7 +513,8 @@
               </button>
             </div>`;
           }).join('')}
-        </div>
+          </div>
+        </details>
       </article>`;
     }).join('');
   }
@@ -668,7 +684,92 @@
     if (e.target.id === 'modal' || e.target.closest('.modal-close') || e.target.closest('[data-close]')) closeModal();
   });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !$('#modal').hidden) closeModal(); });
+  function renderGlossaryAccordion() {
+    const acc = $('#home-glossary-accordion');
+    if (!acc || !D.glossario) return;
+    acc.innerHTML = D.glossario.map(g => `
+      <details class="gloss-acc-item">
+        <summary class="gloss-acc-sum">
+          <div class="gloss-acc-titles">
+            <strong>${g.term}</strong>
+            <span>${g.simple}</span>
+          </div>
+          <span class="gloss-acc-arrow">▾</span>
+        </summary>
+        <div class="gloss-acc-body">
+          <p>${g.explanation}</p>
+          <button type="button" class="btn btn-ghost btn-xs" data-speak data-speak-text="${escapeHTML(g.term + ': ' + g.simple + '. ' + g.explanation)}">
+            ${I.ui('speaker')} <span>Ouvir explicação</span>
+          </button>
+        </div>
+      </details>
+    `).join('');
+  }
+
   document.addEventListener('click', (e) => {
+    // Expand/Collapse Hero Highlight
+    const toggleHero = e.target.closest('[data-toggle-hero]');
+    if (toggleHero) {
+      const banner = $('#continue-banner');
+      const drawer = $('#apb-expand-drawer');
+      if (banner && drawer) {
+        const exp = banner.classList.toggle('is-expanded');
+        drawer.hidden = !exp;
+        toggleHero.setAttribute('aria-expanded', String(exp));
+        toggleHero.querySelector('span').textContent = exp ? 'Recolher ▴' : 'Detalhes ▾';
+        sfx('click');
+      }
+      return;
+    }
+
+    // Home Tabs
+    const homeTab = e.target.closest('[data-home-tab]');
+    if (homeTab) {
+      const target = homeTab.dataset.homeTab;
+      $$('[data-home-tab]').forEach(t => {
+        const act = t.dataset.homeTab === target;
+        t.classList.toggle('active', act);
+        t.setAttribute('aria-selected', String(act));
+      });
+      $$('[data-home-pane]').forEach(p => {
+        p.hidden = p.dataset.homePane !== target;
+      });
+      sfx('click');
+      return;
+    }
+
+    // Calculator Tabs
+    const calcTab = e.target.closest('[data-calc-tab]');
+    if (calcTab) {
+      const target = calcTab.dataset.calcTab;
+      $$('[data-calc-tab]').forEach(t => {
+        const act = t.dataset.calcTab === target;
+        t.classList.toggle('active', act);
+        t.setAttribute('aria-selected', String(act));
+      });
+      $$('[data-calc-pane]').forEach(p => {
+        p.hidden = p.dataset.calcPane !== target;
+      });
+      sfx('click');
+      return;
+    }
+
+    // Habits Tabs
+    const habitsTab = e.target.closest('[data-habits-tab]');
+    if (habitsTab) {
+      const target = habitsTab.dataset.habitsTab;
+      $$('[data-habits-tab]').forEach(t => {
+        const act = t.dataset.habitsTab === target;
+        t.classList.toggle('active', act);
+        t.setAttribute('aria-selected', String(act));
+      });
+      $$('[data-habits-pane]').forEach(p => {
+        p.hidden = p.dataset.habitsPane !== target;
+      });
+      sfx('click');
+      return;
+    }
+
     if (e.target.closest('#btn-open-glossary') || e.target.closest('#btn-glossary-top')) { openGlossaryModal(); return; }
     const b = e.target.closest('[data-lesson]');
     if (b) { sfx('click'); openLesson(b.dataset.lesson); return; }
@@ -910,7 +1011,7 @@
     $('#sound-toggle').innerHTML = state.sound ? I.ui('soundOn') : I.ui('soundOff');
     $('#sound-toggle').setAttribute('aria-pressed', String(state.sound));
     updatePoints();
-    renderTip(); renderHomeStats(); renderTrails(); calc();
+    renderTip(); renderHomeStats(); renderTrails(); renderGlossaryAccordion(); calc();
     renderHabits(); renderBadges(); renderCert();
     modeListeners.forEach(fn => fn());
   }

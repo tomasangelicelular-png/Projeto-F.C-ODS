@@ -69,86 +69,109 @@
     <section id="view-inicio" class="view" aria-labelledby="home-title">
       <div class="container app-dashboard">
 
-        <!-- Cartão Principal de Continuar Jornada (App Primary Action Card) -->
+        <!-- Destaque Principal com Expansão (Progressive Disclosure) -->
         <div class="app-primary-banner" id="continue-banner" data-speak-area></div>
 
-        <!-- Widget de Mascotes Interativos (Modo Infantil) -->
-        <div class="mascot-stage only-kids" aria-label="Mascotes interativos: toque para ouvir uma dica">
-          <div class="speech-bubble" id="mascot-speech" aria-live="polite">
-            <strong id="mascot-speaker">Gotinha:</strong>
-            <span id="mascot-phrase">Toque em mim ou nos meus amigos para ouvir uma dica!</span>
-          </div>
-          <div class="mascot-trio">
-            <button class="mascot-btn mascot-water active" data-mascot-talk="water" aria-label="Ouvir dica da Gotinha">
-              <span class="mascot-art" data-mascot="water"></span>
-              <span class="mascot-name">Gotinha</span>
-              <span class="mascot-tag">Água</span>
-            </button>
-            <button class="mascot-btn mascot-energy" data-mascot-talk="energy" aria-label="Ouvir dica da Centelha">
-              <span class="mascot-art" data-mascot="energy"></span>
-              <span class="mascot-name">Centelha</span>
-              <span class="mascot-tag">Energia</span>
-            </button>
-            <button class="mascot-btn mascot-leaf" data-mascot-talk="leaf" aria-label="Ouvir dica da Folha">
-              <span class="mascot-art" data-mascot="leaf"></span>
-              <span class="mascot-name">Folha</span>
-              <span class="mascot-tag">Reciclagem</span>
-            </button>
+        <!-- Abas de Objetivo para separar áreas sem poluir a tela -->
+        <div class="section-tabs" role="tablist" aria-label="Seções da tela inicial">
+          <button type="button" class="sec-tab active" data-home-tab="atividades" role="tab" aria-selected="true">
+            🎯 Atividades
+          </button>
+          <button type="button" class="sec-tab" data-home-tab="dicas" role="tab" aria-selected="false">
+            💡 Dica &amp; Termos
+          </button>
+          <button type="button" class="sec-tab" data-home-tab="progresso" role="tab" aria-selected="false">
+            📊 Meu Progresso
+          </button>
+        </div>
+
+        <!-- ABA 1: Atividades Principais (Foco limpo nos 4 objetivos) -->
+        <div class="home-tab-pane" data-home-pane="atividades">
+          <div class="app-quick-grid" aria-label="Ações de aprendizagem do aplicativo">
+            <a href="#jogos" class="app-tile tile-games">
+              <div class="tile-top">
+                <span class="tile-icon" data-icon="games"></span>
+                <span class="tile-badge" id="tile-badge-games">4 jogos</span>
+              </div>
+              <strong class="tile-title"><span class="only-kids">Jogos do Planeta</span><span class="only-normal">Desafios Práticos</span></strong>
+              <span class="tile-sub">Aprenda jogando na prática</span>
+            </a>
+
+            <a href="#trilhas" class="app-tile tile-trails">
+              <div class="tile-top">
+                <span class="tile-icon" data-icon="trails"></span>
+                <span class="tile-badge" id="tile-badge-trails">0/9</span>
+              </div>
+              <strong class="tile-title"><span class="only-kids">Histórias Visuais</span><span class="only-normal">Guias Ilustrados</span></strong>
+              <span class="tile-sub">Água, energia e reciclagem</span>
+            </a>
+
+            <a href="#calculadora" class="app-tile tile-calc">
+              <div class="tile-top">
+                <span class="tile-icon" data-icon="calc"></span>
+                <span class="tile-badge" id="tile-badge-calc">Simular</span>
+              </div>
+              <strong class="tile-title"><span class="only-kids">Simulador Divertido</span><span class="only-normal">Simulador da Casa</span></strong>
+              <span class="tile-sub">Calcule sua economia mensal</span>
+            </a>
+
+            <a href="#habitos" class="app-tile tile-habits">
+              <div class="tile-top">
+                <span class="tile-icon" data-icon="habits"></span>
+                <span class="tile-badge" id="tile-badge-habits">0/8 hoje</span>
+              </div>
+              <strong class="tile-title"><span class="only-kids">Missões do Dia</span><span class="only-normal">Missões Diárias</span></strong>
+              <span class="tile-sub">Checklist de hábitos em casa</span>
+            </a>
           </div>
         </div>
 
-        <!-- Banner Educativo: Dicionário Descomplicado -->
-        <div class="educational-banner" id="btn-open-glossary" role="button" tabindex="0" aria-label="Abrir Dicionário Descomplicado do Guardião">
-          <div class="edu-banner-icon">📖</div>
-          <div class="edu-banner-info">
-            <strong class="edu-banner-title">Dicionário Sem Segredos</strong>
-            <p class="edu-banner-desc">O que é Stand-by, Hidrômetro ou kWh? Toque para entender em 1 minuto com áudio!</p>
+        <!-- ABA 2: Dica do Dia & Dicionário Expansível -->
+        <div class="home-tab-pane" data-home-pane="dicas" hidden>
+          <div class="tab-stack">
+            <aside class="tip-of-day" id="tip-of-day" aria-live="polite" data-speak-area></aside>
+
+            <div class="expandable-section">
+              <div class="educational-banner" id="btn-open-glossary" role="button" tabindex="0" aria-label="Abrir Dicionário Descomplicado do Guardião">
+                <div class="edu-banner-icon">📖</div>
+                <div class="edu-banner-info">
+                  <strong class="edu-banner-title">Dicionário Sem Segredos</strong>
+                  <p class="edu-banner-desc">Toque em um termo abaixo para expandir a explicação ou abra o dicionário completo.</p>
+                </div>
+                <span class="edu-banner-pill">Ver todos</span>
+              </div>
+              <div class="glossary-accordion" id="home-glossary-accordion"></div>
+            </div>
+
+            <!-- Widget de Mascotes Interativos (Modo Infantil) -->
+            <div class="mascot-stage only-kids" aria-label="Mascotes interativos: toque para ouvir uma dica">
+              <div class="speech-bubble" id="mascot-speech" aria-live="polite">
+                <strong id="mascot-speaker">Gotinha:</strong>
+                <span id="mascot-phrase">Toque em mim ou nos meus amigos para ouvir uma dica!</span>
+              </div>
+              <div class="mascot-trio">
+                <button class="mascot-btn mascot-water active" data-mascot-talk="water" aria-label="Ouvir dica da Gotinha">
+                  <span class="mascot-art" data-mascot="water"></span>
+                  <span class="mascot-name">Gotinha</span>
+                  <span class="mascot-tag">Água</span>
+                </button>
+                <button class="mascot-btn mascot-energy" data-mascot-talk="energy" aria-label="Ouvir dica da Centelha">
+                  <span class="mascot-art" data-mascot="energy"></span>
+                  <span class="mascot-name">Centelha</span>
+                  <span class="mascot-tag">Energia</span>
+                </button>
+                <button class="mascot-btn mascot-leaf" data-mascot-talk="leaf" aria-label="Ouvir dica da Folha">
+                  <span class="mascot-art" data-mascot="leaf"></span>
+                  <span class="mascot-name">Folha</span>
+                  <span class="mascot-tag">Reciclagem</span>
+                </button>
+              </div>
+            </div>
           </div>
-          <span class="edu-banner-pill">Ver termos</span>
         </div>
 
-        <!-- Grade 2x2 de Atalhos Rápidos do Aplicativo (App Tiles) -->
-        <div class="app-quick-grid" aria-label="Ações de aprendizagem do aplicativo">
-          <a href="#jogos" class="app-tile tile-games">
-            <div class="tile-top">
-              <span class="tile-icon" data-icon="games"></span>
-              <span class="tile-badge" id="tile-badge-games">4 jogos</span>
-            </div>
-            <strong class="tile-title"><span class="only-kids">Jogos do Planeta</span><span class="only-normal">Desafios Práticos</span></strong>
-            <span class="tile-sub">Aprenda jogando</span>
-          </a>
-
-          <a href="#trilhas" class="app-tile tile-trails">
-            <div class="tile-top">
-              <span class="tile-icon" data-icon="trails"></span>
-              <span class="tile-badge" id="tile-badge-trails">0/9</span>
-            </div>
-            <strong class="tile-title"><span class="only-kids">Histórias Visuais</span><span class="only-normal">Guias Ilustrados</span></strong>
-            <span class="tile-sub">Água, energia e lixo</span>
-          </a>
-
-          <a href="#calculadora" class="app-tile tile-calc">
-            <div class="tile-top">
-              <span class="tile-icon" data-icon="calc"></span>
-              <span class="tile-badge" id="tile-badge-calc">Simular</span>
-            </div>
-            <strong class="tile-title"><span class="only-kids">Simulador Divertido</span><span class="only-normal">Simulador da Casa</span></strong>
-            <span class="tile-sub">Baldes e TV poupados</span>
-          </a>
-
-          <a href="#habitos" class="app-tile tile-habits">
-            <div class="tile-top">
-              <span class="tile-icon" data-icon="habits"></span>
-              <span class="tile-badge" id="tile-badge-habits">0/8 hoje</span>
-            </div>
-            <strong class="tile-title"><span class="only-kids">Missões do Dia</span><span class="only-normal">Missões Diárias</span></strong>
-            <span class="tile-sub">Pratique na sua casa</span>
-          </a>
-        </div>
-
-        <!-- Barra unificada: Dica do dia + Resumo de Progresso -->
-        <div class="home-bottom-grid">
-          <aside class="tip-of-day" id="tip-of-day" aria-live="polite" data-speak-area></aside>
+        <!-- ABA 3: Meu Progresso -->
+        <div class="home-tab-pane" data-home-pane="progresso" hidden>
           <div class="stats-grid" id="home-stats" aria-label="Resumo do seu progresso"></div>
         </div>
 
@@ -292,13 +315,20 @@
               <button class="btn btn-ghost btn-sm" data-speak><span data-icon="speaker"></span><span>Ouvir</span></button>
             </div>
             <div class="result-cards" id="calc-cards"></div>
-            <div class="calc-breakdown only-normal" id="calc-breakdown"></div>
-            <table class="calc-table sr-only" id="calc-table"></table>
             <p class="calc-note" id="calc-note"></p>
+            <details class="expand-drawer only-normal">
+              <summary class="expand-summary">📊 Ver detalhamento de economia por hábito</summary>
+              <div class="calc-breakdown" id="calc-breakdown"></div>
+            </details>
+            <table class="calc-table sr-only" id="calc-table"></table>
           </div>
 
           <form id="calc-form" class="calc-form" onsubmit="return false">
-            <fieldset>
+            <div class="section-tabs calc-tabs" role="tablist" aria-label="Categorias do simulador">
+              <button type="button" class="sec-tab active" data-calc-tab="agua" role="tab" aria-selected="true">💧 Água e Banho</button>
+              <button type="button" class="sec-tab" data-calc-tab="energia" role="tab" aria-selected="false">⚡ Energia e Luz</button>
+            </div>
+            <fieldset data-calc-pane="agua">
               <legend><span data-icon="water"></span> Uso de Água no Dia a Dia</legend>
               <label>
                 <span class="label-row">
@@ -343,7 +373,7 @@
               </label>
             </fieldset>
 
-            <fieldset>
+            <fieldset data-calc-pane="energia" hidden>
               <legend><span data-icon="energy"></span> Energia e Limpeza Externa</legend>
               <label>
                 <span class="label-row">
@@ -431,7 +461,12 @@
           <button class="btn btn-ghost btn-sm" data-speak><span data-icon="speaker"></span><span>Ouvir</span></button>
         </header>
 
-        <div class="habits-layout">
+        <div class="section-tabs" role="tablist" aria-label="Seções de Hábitos e Conquistas">
+          <button type="button" class="sec-tab active" data-habits-tab="checklist" role="tab" aria-selected="true">✅ Checklist de Hoje</button>
+          <button type="button" class="sec-tab" data-habits-tab="conquistas" role="tab" aria-selected="false">🏅 Medalhas e Certificado</button>
+        </div>
+
+        <div data-habits-pane="checklist">
           <section class="panel" aria-labelledby="habit-list-title">
             <div class="panel-head">
               <div>
@@ -452,22 +487,24 @@
             <div class="bar habit-bar-wrap"><span id="habit-bar"></span></div>
             <ul class="habit-list" id="habit-list"></ul>
           </section>
+        </div>
 
-          <section class="panel" aria-labelledby="badges-title">
+        <div data-habits-pane="conquistas" hidden>
+          <section class="panel" aria-labelledby="badges-title" style="margin-bottom:.85rem;">
             <div class="panel-head">
               <h2 id="badges-title"><span class="only-kids">Suas medalhas</span><span class="only-normal">Conquistas</span></h2>
               <span class="habit-counter" id="badges-count">0/8</span>
             </div>
             <ul class="badges" id="badges"></ul>
           </section>
-        </div>
 
-        <section class="panel cert-panel" aria-labelledby="cert-title">
-          <div class="panel-head">
-            <h2 id="cert-title"><span data-icon="cert"></span> <span class="only-kids">Diploma de Guardião</span><span class="only-normal">Certificado de Conclusão</span></h2>
-          </div>
-          <div id="cert-area"></div>
-        </section>
+          <section class="panel cert-panel" aria-labelledby="cert-title">
+            <div class="panel-head">
+              <h2 id="cert-title"><span data-icon="cert"></span> <span class="only-kids">Diploma de Guardião</span><span class="only-normal">Certificado de Conclusão</span></h2>
+            </div>
+            <div id="cert-area"></div>
+          </section>
+        </div>
 
         <div class="reset-row">
           <button class="btn btn-ghost btn-sm" id="reset-progress">Zerar dados deste aparelho</button>

@@ -1828,3 +1828,258 @@ body.mode-kids .app-primary-banner {
 }
 
 #game-area:focus { outline: none; }
+
+/* =========================================================
+   SISTEMA DE ABAS POR OBJETIVO & CARDS EXPANSÍVEIS
+   ========================================================= */
+.section-tabs {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: .3rem;
+  border-radius: 14px;
+  box-shadow: var(--shadow-xs);
+}
+.sec-tab {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  min-height: 40px;
+  padding: .4rem .75rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: .86rem;
+  color: var(--muted);
+  background: transparent;
+  transition: background-color .16s ease, color .16s ease, box-shadow .16s ease, transform .1s ease;
+  user-select: none;
+}
+.sec-tab:hover {
+  color: var(--text);
+  background: var(--surface-soft);
+}
+.sec-tab.active {
+  background: var(--primary);
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(15, 81, 50, .2);
+}
+.sec-tab:active {
+  transform: scale(0.97);
+}
+
+.home-tab-pane {
+  animation: fadeInTab .18s ease-out;
+}
+@keyframes fadeInTab {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.tab-stack {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+}
+
+/* Destaque Principal com Expansão (Progressive Disclosure) */
+.app-primary-banner {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  padding: 1.05rem 1.2rem;
+}
+.apb-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+.btn-apb-expand {
+  min-height: 42px;
+  padding: 0 .85rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .14);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, .28);
+  font-weight: 700;
+  font-size: .82rem;
+  transition: background-color .15s ease, transform .1s ease;
+}
+.btn-apb-expand:hover {
+  background: rgba(255, 255, 255, .24);
+}
+.apb-expand-drawer {
+  margin-top: .9rem;
+  padding-top: .85rem;
+  border-top: 1px solid rgba(255, 255, 255, .18);
+  animation: fadeInTab .2s ease-out;
+}
+.apb-expand-desc {
+  margin: 0 0 .65rem;
+  font-size: .88rem;
+  line-height: 1.45;
+  opacity: .95;
+}
+.apb-expand-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+.apb-expand-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .45rem;
+}
+.apb-chip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .3rem .7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .16);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: .78rem;
+  font-weight: 700;
+}
+.apb-chip-link:hover {
+  background: rgba(255, 255, 255, .26);
+}
+
+/* Acordeão Expansível do Dicionário Sem Segredos */
+.expandable-section {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+.glossary-accordion {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: .5rem;
+}
+.gloss-acc-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.gloss-acc-item[open] {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-sm);
+}
+.gloss-acc-sum {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .65rem .85rem;
+  cursor: pointer;
+  user-select: none;
+}
+.gloss-acc-sum::-webkit-details-marker { display: none; }
+.gloss-acc-icon {
+  font-size: 1.25rem;
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--surface-soft);
+  display: grid; place-items: center;
+  flex-shrink: 0;
+}
+.gloss-acc-titles {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+.gloss-acc-titles strong { font-size: .88rem; color: var(--text); }
+.gloss-acc-titles span { font-size: .75rem; color: var(--muted); }
+.gloss-acc-arrow {
+  color: var(--muted);
+  font-size: .85rem;
+  transition: transform .2s ease;
+}
+.gloss-acc-item[open] .gloss-acc-arrow {
+  transform: rotate(180deg);
+}
+.gloss-acc-body {
+  padding: 0 .85rem .85rem;
+  font-size: .83rem;
+  color: var(--muted);
+  line-height: 1.42;
+}
+.gloss-acc-body p { margin: 0 0 .45rem; }
+
+/* Trilhas Expansíveis */
+.trail-expand-details {
+  margin-top: .55rem;
+  border-top: 1px solid var(--border);
+  padding-top: .45rem;
+}
+.trail-expand-summary {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .45rem .65rem;
+  border-radius: 10px;
+  background: var(--surface-soft);
+  font-weight: 700;
+  font-size: .83rem;
+  color: var(--primary);
+  cursor: pointer;
+  user-select: none;
+}
+.trail-expand-summary::-webkit-details-marker { display: none; }
+.trail-expand-summary:hover { background: var(--primary-soft); }
+.trail-expand-chevron { transition: transform .2s ease; }
+.trail-expand-details[open] .trail-expand-chevron { transform: rotate(180deg); }
+.trail-expand-details[open] .learning-path { margin-top: .55rem; }
+
+/* Gaveta Expansível no Simulador */
+.expand-drawer {
+  margin-top: .65rem;
+  background: var(--surface-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .45rem .75rem;
+}
+.expand-summary {
+  list-style: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: .82rem;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  user-select: none;
+}
+.expand-summary::-webkit-details-marker { display: none; }
+.expand-drawer[open] .calc-breakdown {
+  margin-top: .65rem;
+  padding-top: .55rem;
+  border-top: 1px solid var(--border);
+}
+.calc-tabs {
+  margin-bottom: .75rem;
+}
+
+@media (max-width: 600px) {
+  .apb-main-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: .75rem;
+  }
+  .sec-tab {
+    font-size: .76rem;
+    padding: .35rem .4rem;
+    min-height: 36px;
+  }
+}
