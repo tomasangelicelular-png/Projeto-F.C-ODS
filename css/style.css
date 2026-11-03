@@ -1096,7 +1096,7 @@ body.mode-kids .app-primary-banner {
 }
 .conveyor-track-wrap { padding: .6rem .9rem .5rem; }
 .conveyor-stage { position: relative; height: 78px; width: 100%; display: flex; align-items: center; }
-.conveyor-mover { position: absolute; top: 3px; left: 3%; transition: left .05s linear; z-index: 2; }
+.conveyor-mover { position: absolute; top: 3px; left: 3%; transition: left .05s linear; z-index: 30; }
 .chute-danger {
   position: absolute; right: 0; bottom: 0;
   width: 30px; height: 64px; border-radius: 8px;
@@ -1769,7 +1769,7 @@ body.mode-kids .app-primary-banner {
   .conveyor-item { padding: .32rem .55rem; gap: .4rem; }
   .conveyor-svg { width: 36px; height: 36px; }
   .conveyor-tag strong { font-size: .8rem; }
-  .conveyor-tag span { display: none; }
+  .conveyor-tag span { display: block; font-size: .64rem; }
   .ecoponto-floor.bins-count-7 { grid-template-columns: repeat(4, 1fr); gap: .22rem; padding: .35rem .35rem .5rem; }
   .sb-graphic { max-width: 50px; }
   .sb-label { font-size: .66rem; padding: .06rem .28rem; }
@@ -1824,3 +1824,5 @@ body.mode-kids .app-primary-banner {
   body.printing-cert #certificate { position: fixed; left: 0; top: 0; width: 100%; margin: 0; }
   @page { size: landscape; margin: 1cm; }
 }
+
+#game-area:focus { outline: none; }

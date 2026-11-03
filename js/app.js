@@ -919,8 +919,8 @@
     save(); applyMode(); sfx('click');
     toast(isKids() ? 'Modo Infantil ativado' : 'Modo Normal ativado');
   });
-  $('#font-inc').addEventListener('click', () => { state.fontScale = Math.min(1.5, +(state.fontScale + 0.1).toFixed(2)); save(); applyMode(); });
-  $('#font-dec').addEventListener('click', () => { state.fontScale = Math.max(0.9, +(state.fontScale - 0.1).toFixed(2)); save(); applyMode(); });
+  $('#font-inc')?.addEventListener('click', () => { state.fontScale = Math.min(1.5, +(state.fontScale + 0.1).toFixed(2)); save(); applyMode(); });
+  $('#font-dec')?.addEventListener('click', () => { state.fontScale = Math.max(0.9, +(state.fontScale - 0.1).toFixed(2)); save(); applyMode(); });
   $('#sound-toggle').addEventListener('click', () => { state.sound = !state.sound; save(); applyMode(); sfx('click'); });
 
   /* Boas-vindas na primeira visita */

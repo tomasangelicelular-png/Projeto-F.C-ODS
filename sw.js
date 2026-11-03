@@ -1,5 +1,5 @@
 /* EcoGuardiões — Service Worker (RNF-04: funcionamento offline) */
-const CACHE = 'ecoguardioes-v8';
+const CACHE = 'ecoguardioes-v10';
 const ASSETS = [
   './', './index.html', './css/style.css',
   './js/icons.js', './js/data.js', './js/app.js', './js/games.js',
