@@ -258,9 +258,12 @@
         let startX = 0, startY = 0;
         let curBin = null;
 
+        const moverEl = $('#sort-mover');
         const cleanupDrag = () => {
           isPointerActive = false;
+          this.dragging = false;
           card.classList.remove('dragging');
+          if (moverEl) moverEl.style.zIndex = '';
           if (curBin) {
             curBin.classList.remove('over');
             curBin = null;
@@ -271,11 +274,13 @@
           if (this.locked) return;
           if (e.pointerType === 'mouse' && e.button !== 0) return;
           isPointerActive = true;
+          this.dragging = true;
           startX = e.clientX;
           startY = e.clientY;
           card.classList.add('dragging');
           card.style.transition = 'none';
           card.style.zIndex = '999';
+          if (moverEl) moverEl.style.zIndex = '60';
           try { card.setPointerCapture(e.pointerId); } catch (_) {}
           E.haptic?.(20);
         });
@@ -353,7 +358,7 @@
         card.addEventListener('dragend', () => card.classList.remove('dragging'));
       }
 
-      $('.street-bin', area).forEach(b => {
+      $$('.street-bin', area).forEach(b => {
         b.addEventListener('click', (e) => {
           e.preventDefault();
           this.choose(b.dataset.bin, b);
@@ -366,13 +371,17 @@
       this.startBeltTimer();
     },
     startBeltTimer() {
-      const start = performance.now();
+      let elapsed = 0;
+      let lastTick = performance.now();
       const total = this.c.timeMs;
       const mover = $('#sort-mover');
       const txt = $('#belt-time-txt');
       activeTimer = setInterval(() => {
-        if (this.locked || active !== 'sort') return;
-        const elapsed = performance.now() - start;
+        const now = performance.now();
+        const dt = now - lastTick;
+        lastTick = now;
+        if (this.locked || this.dragging || active !== 'sort') return;
+        elapsed += dt;
         const ratio = Math.min(1, elapsed / total);
         if (mover) mover.style.left = `${3 + ratio * 72}%`;
         const remain = Math.max(0, Math.ceil((total - elapsed) / 1000));

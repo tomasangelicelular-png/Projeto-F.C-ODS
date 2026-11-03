@@ -1080,13 +1080,14 @@ body.mode-kids .app-primary-banner {
 .ecoponto-scene {
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
-  overflow: hidden;
+  overflow: visible;
   background: linear-gradient(180deg, #E0F2FE 0%, #F0F9FF 52%, #E2E8F0 52%, #CBD5E1 100%);
 }
 .conveyor-header {
   display: flex; justify-content: space-between; align-items: center; gap: .6rem;
   padding: .45rem .8rem; background: rgba(255, 255, 255, .9);
   border-bottom: 1px solid var(--border); font-size: .82rem;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
 .sort-live-msg { font-weight: 600; color: var(--muted); }
 .sort-live-msg.ok { color: var(--ok); }
@@ -1135,6 +1136,7 @@ body.mode-kids .app-primary-banner {
   padding: .45rem .55rem .65rem;
   background: #CBD5E1;
   border-top: 2px solid #94A3B8;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 .ecoponto-floor.bins-count-4 { grid-template-columns: repeat(4, 1fr); }
 .ecoponto-floor.bins-count-7 { grid-template-columns: repeat(7, 1fr); }

@@ -725,6 +725,7 @@
     const banhosPoupados = Math.max(1, Math.round(litros / 45));
     const horasTv = Math.max(1, Math.round(kwh * 5));
     const arvoresEquiv = Math.max(1, Math.round(co2Ano / 15));
+    const caixasDagua = Math.max(1, Math.round(litros / 1000));
 
     const tbCalc = $('#tile-badge-calc');
     if (tbCalc) tbCalc.textContent = `${money(totalRs)}/mês`;
@@ -964,7 +965,13 @@
   checkBadges();
 
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-    window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').then(reg => reg.update()).catch(() => {});
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) { refreshing = true; window.location.reload(); }
+      });
+    });
   }
   if (canSpeak) speechSynthesis.getVoices();
 })();
