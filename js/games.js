@@ -227,7 +227,7 @@
                   <div class="conveyor-svg">${I.item(it.svgKey)}</div>
                   <div class="conveyor-tag">
                     <strong>${it.name}</strong>
-                    <span>Toque na lixeira certa</span>
+                    <span>Arraste ou toque na lixeira</span>
                   </div>
                 </div>
               </div>
@@ -253,14 +253,111 @@
         </div>`;
 
       const card = $('#sort-item');
-      card.addEventListener('dragstart', (e) => {
-        card.classList.add('dragging');
-        if (e.dataTransfer) e.dataTransfer.setData('text/plain', it.bin);
-      });
-      card.addEventListener('dragend', () => card.classList.remove('dragging'));
+      if (card) {
+        let isPointerActive = false;
+        let startX = 0, startY = 0;
+        let curBin = null;
 
-      $$('.street-bin', area).forEach(b => {
-        b.addEventListener('click', () => this.choose(b.dataset.bin, b));
+        const cleanupDrag = () => {
+          isPointerActive = false;
+          card.classList.remove('dragging');
+          if (curBin) {
+            curBin.classList.remove('over');
+            curBin = null;
+          }
+        };
+
+        card.addEventListener('pointerdown', (e) => {
+          if (this.locked) return;
+          if (e.pointerType === 'mouse' && e.button !== 0) return;
+          isPointerActive = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          card.classList.add('dragging');
+          card.style.transition = 'none';
+          card.style.zIndex = '999';
+          try { card.setPointerCapture(e.pointerId); } catch (_) {}
+          E.haptic?.(20);
+        });
+
+        card.addEventListener('pointermove', (e) => {
+          if (!isPointerActive || this.locked) return;
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+
+          card.style.transform = `translate3d(${dx}px, ${dy}px, 0) scale(1.08)`;
+
+          card.style.pointerEvents = 'none';
+          const el = document.elementFromPoint(e.clientX, e.clientY);
+          card.style.pointerEvents = '';
+
+          const bin = el ? el.closest('.street-bin') : null;
+          if (bin !== curBin) {
+            if (curBin) curBin.classList.remove('over');
+            curBin = bin;
+            if (curBin && !curBin.disabled) {
+              curBin.classList.add('over');
+              E.haptic?.(15);
+            }
+          }
+        });
+
+        const finishDrag = (e) => {
+          if (!isPointerActive) return;
+          const dx = e.clientX - startX;
+          const dy = e.clientY - startY;
+          const moved = Math.hypot(dx, dy) > 18;
+
+          try { card.releasePointerCapture(e.pointerId); } catch (_) {}
+
+          card.style.pointerEvents = 'none';
+          const el = document.elementFromPoint(e.clientX, e.clientY);
+          card.style.pointerEvents = '';
+          const bin = el ? el.closest('.street-bin') : null;
+
+          cleanupDrag();
+
+          if (bin && !bin.disabled && moved) {
+            card.style.transform = '';
+            card.style.zIndex = '';
+            this.choose(bin.dataset.bin, bin);
+          } else {
+            card.style.transition = 'transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1)';
+            card.style.transform = 'translate3d(0, 0, 0)';
+            setTimeout(() => {
+              card.style.transition = '';
+              card.style.zIndex = '';
+            }, 230);
+
+            if (!moved) {
+              this.showBanner('Dica: Arraste até a lixeira ou toque nela!', 'hint');
+            }
+          }
+        };
+
+        card.addEventListener('pointerup', finishDrag);
+        card.addEventListener('pointercancel', () => {
+          cleanupDrag();
+          card.style.transition = 'transform 0.2s ease-out';
+          card.style.transform = 'translate3d(0, 0, 0)';
+          setTimeout(() => {
+            card.style.transition = '';
+            card.style.zIndex = '';
+          }, 200);
+        });
+
+        card.addEventListener('dragstart', (e) => {
+          card.classList.add('dragging');
+          if (e.dataTransfer) e.dataTransfer.setData('text/plain', it.bin);
+        });
+        card.addEventListener('dragend', () => card.classList.remove('dragging'));
+      }
+
+      $('.street-bin', area).forEach(b => {
+        b.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.choose(b.dataset.bin, b);
+        });
         b.addEventListener('dragover', (e) => { e.preventDefault(); b.classList.add('over'); });
         b.addEventListener('dragleave', () => b.classList.remove('over'));
         b.addEventListener('drop', (e) => { e.preventDefault(); b.classList.remove('over'); this.choose(b.dataset.bin, b); });
